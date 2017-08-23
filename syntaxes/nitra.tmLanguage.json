@@ -1,0 +1,126 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Nitra",	
+	"scopeName": "source.nitra",
+	"uuid": "81301747-47b9-41c5-8f66-3d5fda39bde6",
+	"patterns": [
+		{
+			"include": "#nitra-keywords"
+		},
+		{
+			"include": "#nitra-predefined"
+		},		
+		{
+			"include": "#comment"
+		},		
+		{
+			"include": "#nitra-operators"
+		}
+	],
+	"repository": {				
+		"nitra-keywords": {
+			"patterns": [{
+				"name": "keyword.other.nitra",
+				"match": "\\b(keyword|as|syntax|declaration|declarations|ast|asts|extend|module|marker|map|token|field|span|alias|regex|literal|decompose|multiple|optional|abstract|in|out|inout|class|this|rule|precedence|using|namespace|PredefinedType|right-associative)\\b"
+			}]
+		},
+		"nitra-operators": {
+			"patterns": [
+				{
+					"name": "keyword.operator.assignment.compound.nitra",
+					"match": "\\*=|/=|%=|\\+=|-="
+				},
+				{
+					"name": "keyword.operator.assignment.compound.bitwise.nitra",
+					"match": "\\&=|\\^=|<<=|>>=|\\|="
+				},
+				{
+					"name": "keyword.operator.bitwise.shift.nitra",
+					"match": "<<|>>"
+				},
+				{
+					"name": "keyword.operator.comparison.nitra",
+					"match": "==|!="
+				},
+				{
+					"name": "keyword.operator.relational.nitra",
+					"match": "<=|>=|<|>"
+				},
+				{
+					"name": "keyword.operator.logical.nitra",
+					"match": "\\!|&&|\\|\\|"
+				},
+				{
+					"name": "keyword.operator.bitwise.nitra",
+					"match": "\\&|~|\\^|\\|"
+				},
+				{
+					"name": "keyword.operator.assignment.nitra",
+					"match": "\\="
+				},
+				{
+					"name": "keyword.operator.decrement.nitra",
+					"match": "--"
+				},
+				{
+					"name": "keyword.operator.increment.nitra",
+					"match": "\\+\\+"
+				},
+				{
+					"name": "keyword.operator.arithmetic.nitra",
+					"match": "%|\\*|/|-|\\+"
+				},
+				{
+					"name": "keyword.operator.mapping.nitra",
+					"match": "->"
+				}
+			]
+		},
+		"nitra-predefined": {
+			"patterns": [{
+				"name": "keyword.control.nitra",
+				"match": "\\b(Any|HighSurrogates|LowSurrogates|NonSurrogates|UnicodeLineSeparator|UnicodeParagraphSeparator|NewLineCharacter|NewLine|Whitespace|Space|Spaces|s|S|LetterCharacter|CombiningCharacter|DecimalDigitCharacter|ConnectingCharacter|FormattingCharacter|IdentifierStartCharacter|IdentifierPartCharacters|IdentifierBody|Start|Start|End|Alias|BindableAst|Container|Declaration|Name|Reference|ScopedAst|Type|TypeVar)\\b"
+			}]
+		},
+		"comment": {
+			"patterns": [
+				{
+					"name": "comment.block.nitra",
+					"begin": "/\\*",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.nitra"
+						}
+					},
+					"end": "\\*/",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.nitra"
+						}
+					}
+				},
+				{
+					"begin": "(^\\s+)?(?=//)",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.whitespace.comment.leading.nitra"
+						}
+					},
+					"end": "(?=$)",
+					"patterns": [						
+						{
+							"name": "comment.line.double-slash.nitra",
+							"begin": "(?<!/)//(?!/)",
+							"beginCaptures": {
+								"0": {
+									"name": "punctuation.definition.comment.nitra"
+								}
+							},
+							"end": "(?=$)"
+						}
+					]
+				}
+			]
+		}
+	}
+}

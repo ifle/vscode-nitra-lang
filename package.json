@@ -1,0 +1,26 @@
+{
+    "name": "nitra",
+    "displayName": "nitra",
+    "description": "Nitra VS Code extension",
+    "version": "0.0.1",
+    "publisher": "ifle",
+    "engines": {
+        "vscode": "*"
+    },
+    "categories": [
+        "Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "nitra",
+            "aliases": ["Nitra", "nitra"],
+            "extensions": [".nitra"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "nitra",
+            "scopeName": "source.nitra",
+            "path": "./syntaxes/nitra.tmLanguage.json"
+        }]
+    }
+}
