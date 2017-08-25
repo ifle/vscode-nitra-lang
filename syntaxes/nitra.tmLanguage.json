@@ -7,20 +7,23 @@
             "include": "#nitra-keywords"
         },
         {
-            "include": "#nitra-predefined"
-        },
-        {
             "include": "#comment"
         },
         {
             "include": "#nitra-operators"
+        },
+        {
+            "include": "#ast-declaration"
+        },
+        {
+            "include": "#field-declaration"
         }
     ],
     "repository": {
         "nitra-keywords": {
             "patterns": [{
                 "name": "keyword.other.nitra",
-                "match": "\\b(keyword|as|syntax|declaration|declarations|ast|asts|extend|module|marker|map|token|field|span|alias|regex|literal|decompose|multiple|optional|abstract|in|out|inout|class|this|rule|precedence|using|namespace|PredefinedType|right-associative|keyoutline_impl|outline_impl|outline_begin|outline_end|outline_begin_before|outline_end_before|outline_hiden|sm|inl|nl|d|i)\\b"
+                "match": "\\b(start|language|keyword|as|syntax|declaration|declarations|ast|asts|extend|module|marker|map|token|field|span|alias|regex|literal|decompose|multiple|optional|abstract|in|out|inout|class|this|rule|precedence|using|namespace|PredefinedType|right-associative|keyoutline_impl|outline_impl|outline_begin|outline_end|outline_begin_before|outline_end_before|outline_hiden|sm|inl|nl|d|i)\\b"
             }]
         },
         "nitra-operators": {
@@ -78,6 +81,57 @@
             "patterns": [{
                 "name": "keyword.control.nitra",
                 "match": "\\b(Any|HighSurrogates|LowSurrogates|NonSurrogates|UnicodeLineSeparator|UnicodeParagraphSeparator|NewLineCharacter|NewLine|Whitespace|Space|Spaces|s|S|LetterCharacter|CombiningCharacter|DecimalDigitCharacter|ConnectingCharacter|FormattingCharacter|IdentifierStartCharacter|IdentifierPartCharacters|IdentifierBody|Start|Start|End|Alias|BindableAst|Container|Declaration|Name|Reference|ScopedAst|Type|TypeVar)\\b"
+            }]
+        },
+        "ast-declaration": {
+            "patterns": [{
+                "match": "(?:(?:\\b(?<=ast|declaration)\\s+)|(?<=\\|)\\s*)([_[:alpha:]][_[:alnum:]]*)(?:\\s+(:)\\s*([_[:alpha:]][_[:alnum:]]*)\\s*(?:(,)\\s*([_[:alpha:]][_[:alnum:]]*))*)?",
+                "captures": {
+                    "1": {
+                        "name": "entity.name.type.class.nitra"
+                    },
+                    "2": {
+                        "name": "punctuation.terminator.statement.nitra"
+                    },
+                    "3": {
+                        "name": "entity.name.type.nitra"
+                    },
+                    "4": {
+                        "name": "punctuation.separator.comma.nitra"
+                    },
+                    "5": {
+                        "name": "entity.name.type.nitra"
+                    }
+                }
+            }]
+        },
+        "field-declaration": {
+            "patterns": [{
+                "match": "\\b(?<varname>[_[:alpha:]][_[:alnum:]]*)\\s*(?:(?<dot>\\.)\\s*(?<propname>[_[:alpha:]][_[:alnum:]]*))*\\s*(?:(?<typepunctuation>[:])\\s*(?<type>[_[:alpha:]][_[:alnum:]]*)(?<repetition>[+?*])?)?(?:\\s*(?<opequal>(?:=|-\\>))\\s*[^;]+)?;",
+                "captures": {
+                    "1": {
+                        "name": "variable.other.object.property"
+                    },
+                    "2": {
+                        "name": "punctuation.terminator.statement.nitra"
+                    },
+                    "3": {
+                        "name": "keyword.control.nitra"
+                    },
+                    "4": {
+                        "name": "punctuation.terminator.statement.nitra"
+                    },
+                    "5": {
+                        "name": "entity.name.type.nitra"
+                    },
+                    "6": {
+                        "name": "string.regexp.arbitrary-repetition"
+                    },
+                    "7": {
+                        "name": "punctuation.separator.comma.nitra"
+                    }
+                }
+
             }]
         },
         "comment": {
