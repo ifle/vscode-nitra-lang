@@ -8,6 +8,6 @@ Highlighting
 
 Adds highlighting support for Nitra (.nitra).
 
-### 0.0.1
+### 0.0.*
 
 Initial release of Highlighting

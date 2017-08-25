@@ -1,0 +1,566 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Nitra",
+    "scopeName": "source.nitra",
+    "uuid": "81301747-47b9-41c5-8f66-3d5fda39bde6",
+    "patterns": [
+        {
+            "include": "#nitra-builtin"
+        },
+        {
+            "include": "#comment"
+        },
+        {
+            "include": "#nitra-operators"
+        },
+        {
+            "include": "#ast-declaration"
+        }
+    ],
+    "repository": {        
+        "nitra-keywords": {
+            "patterns": [{
+                "name": "keyword.other.nitra",
+                "match": "\\b(keyword|as|syntax|declaration|declarations|ast|asts|extend|module|marker|map|token|field|span|alias|regex|literal|decompose|multiple|optional|abstract|in|out|inout|class|this|rule|precedence|using|namespace|PredefinedType|right-associative|keyoutline_impl|outline_impl|outline_begin|outline_end|outline_begin_before|outline_end_before|outline_hiden|sm|inl|nl|d|i)\\b"
+            }]
+        },
+        "nitra-operators": {
+            "patterns": [{
+                    "name": "keyword.operator.assignment.compound.nitra",
+                    "match": "\\*=|/=|%=|\\+=|-="
+                },
+                {
+                    "name": "keyword.operator.assignment.compound.bitwise.nitra",
+                    "match": "\\&=|\\^=|<<=|>>=|\\|="
+                },
+                {
+                    "name": "keyword.operator.bitwise.shift.nitra",
+                    "match": "<<|>>"
+                },
+                {
+                    "name": "keyword.operator.comparison.nitra",
+                    "match": "==|!="
+                },
+                {
+                    "name": "keyword.operator.relational.nitra",
+                    "match": "<=|>=|<|>"
+                },
+                {
+                    "name": "keyword.operator.logical.nitra",
+                    "match": "\\!|&&|\\|\\|"
+                },
+                {
+                    "name": "keyword.operator.bitwise.nitra",
+                    "match": "\\&|~|\\^|\\|"
+                },
+                {
+                    "name": "keyword.operator.assignment.nitra",
+                    "match": "\\="
+                },
+                {
+                    "name": "keyword.operator.decrement.nitra",
+                    "match": "--"
+                },
+                {
+                    "name": "keyword.operator.increment.nitra",
+                    "match": "\\+\\+"
+                },
+                {
+                    "name": "keyword.operator.arithmetic.nitra",
+                    "match": "%|\\*|/|-|\\+"
+                },
+                {
+                    "name": "keyword.operator.mapping.nitra",
+                    "match": "->"
+                }
+            ]
+        },
+        "nitra-builtin": {
+            "patterns": [{
+                "name": "keyword.control.nitra",
+                "match": "\\b(Any|HighSurrogates|LowSurrogates|NonSurrogates|UnicodeLineSeparator|UnicodeParagraphSeparator|NewLineCharacter|NewLine|Whitespace|Space|Spaces|s|S|LetterCharacter|CombiningCharacter|DecimalDigitCharacter|ConnectingCharacter|FormattingCharacter|IdentifierStartCharacter|IdentifierPartCharacters|IdentifierBody|Start|Start|End|Alias|BindableAst|Container|Declaration|Name|Reference|ScopedAst|Type|TypeVar)\\b"
+            }]
+        },
+        "comment": {
+            "patterns": [{
+                    "name": "comment.block.nitra",
+                    "begin": "/\\*",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.comment.nitra"
+                        }
+                    },
+                    "end": "\\*/",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.definition.comment.nitra"
+                        }
+                    }
+                },
+                {
+                    "begin": "(^\\s+)?(?=//)",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "punctuation.whitespace.comment.leading.nitra"
+                        }
+                    },
+                    "end": "(?=$)",
+                    "patterns": [{
+                        "name": "comment.line.double-slash.nitra",
+                        "begin": "(?<!/)//(?!/)",
+                        "beginCaptures": {
+                            "0": {
+                                "name": "punctuation.definition.comment.nitra"
+                            }
+                        },
+                        "end": "(?=$)"
+                    }]
+                }
+            ]
+        },
+        "type-declarations": {
+			"patterns": [				
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#storage-modifier"
+				},
+				{
+					"include": "#ast-declaration"
+				},
+				{
+					"include": "#punctuation-semicolon"
+				}
+			]
+        },        
+        "identifiers": {
+			"patterns": [
+				{
+					"include": "#object-identifiers"
+				},
+				{
+					"match": "(\\.)\\s*([[:upper:]][_$[:digit:][:upper:]]*)(?![_$[:alnum:]])",
+					"captures": {
+						"1": {
+							"name": "punctuation.accessor.nitra"
+						},
+						"2": {
+							"name": "variable.other.constant.property.nitra"
+						}
+					}
+				},
+				{
+					"match": "(\\.)\\s*([_$[:alpha:]][_$[:alnum:]]*)",
+					"captures": {
+						"1": {
+							"name": "punctuation.accessor.nitra"
+						},
+						"2": {
+							"name": "variable.other.property.nitra"
+						}
+					}
+				},
+				{
+					"name": "variable.other.constant.nitra",
+					"match": "([[:upper:]][_$[:digit:][:upper:]]*)(?![_$[:alnum:]])"
+				},
+				{
+					"name": "variable.other.readwrite.nitra",
+					"match": "[_$[:alpha:]][_$[:alnum:]]*"
+				}
+			]
+        },
+        "object-identifiers": {
+			"patterns": [
+				{
+					"name": "support.class.nitra",
+					"match": "([_$[:alpha:]][_$[:alnum:]]*)(?=\\s*\\.\\s*prototype\\b(?!\\$))"
+				},
+				{
+					"match": "(?x)(\\.)\\s*(?:\n  ([[:upper:]][_$[:digit:][:upper:]]*) |\n  ([_$[:alpha:]][_$[:alnum:]]*)\n)(?=\\s*\\.\\s*[_$[:alpha:]][_$[:alnum:]]*)",
+					"captures": {
+						"1": {
+							"name": "punctuation.accessor.nitra"
+						},
+						"2": {
+							"name": "variable.other.constant.object.property.nitra"
+						},
+						"3": {
+							"name": "variable.other.object.property.nitra"
+						}
+					}
+				},
+				{
+					"match": "(?x)(?:\n  ([[:upper:]][_$[:digit:][:upper:]]*) |\n  ([_$[:alpha:]][_$[:alnum:]]*)\n)(?=\\s*\\.\\s*[_$[:alpha:]][_$[:alnum:]]*)",
+					"captures": {
+						"1": {
+							"name": "variable.other.constant.object.nitra"
+						},
+						"2": {
+							"name": "variable.other.object.nitra"
+						}
+					}
+				}
+			]
+        },
+        "literal": {
+			"patterns": [
+				{
+					"include": "#numeric-literal"
+				},
+				{
+					"include": "#boolean-literal"
+				}
+			]
+		},
+		"numeric-literal": {
+			"patterns": [
+				{
+					"name": "constant.numeric.hex.nitra",
+					"match": "\\b(?<!\\$)0(x|X)[0-9a-fA-F]+\\b(?!\\$)"
+				},
+				{
+					"name": "constant.numeric.binary.nitra",
+					"match": "\\b(?<!\\$)0(b|B)[01]+\\b(?!\\$)"
+				},
+				{
+					"name": "constant.numeric.octal.nitra",
+					"match": "\\b(?<!\\$)0(o|O)?[0-7]+\\b(?!\\$)"
+				},
+				{
+					"match": "(?x)\n(?<!\\$)(?:\n  (?:\\b[0-9]+(\\.)[0-9]+[eE][+-]?[0-9]+\\b)| # 1.1E+3\n  (?:\\b[0-9]+(\\.)[eE][+-]?[0-9]+\\b)|       # 1.E+3\n  (?:\\B(\\.)[0-9]+[eE][+-]?[0-9]+\\b)|       # .1E+3\n  (?:\\b[0-9]+[eE][+-]?[0-9]+\\b)|            # 1E+3\n  (?:\\b[0-9]+(\\.)[0-9]+\\b)|                # 1.1\n  (?:\\b[0-9]+(\\.)\\B)|                      # 1.\n  (?:\\B(\\.)[0-9]+\\b)|                      # .1\n  (?:\\b[0-9]+\\b(?!\\.))                     # 1\n)(?!\\$)",
+					"captures": {
+						"0": {
+							"name": "constant.numeric.decimal.nitra"
+						},
+						"1": {
+							"name": "meta.delimiter.decimal.period.nitra"
+						},
+						"2": {
+							"name": "meta.delimiter.decimal.period.nitra"
+						},
+						"3": {
+							"name": "meta.delimiter.decimal.period.nitra"
+						},
+						"4": {
+							"name": "meta.delimiter.decimal.period.nitra"
+						},
+						"5": {
+							"name": "meta.delimiter.decimal.period.nitra"
+						},
+						"6": {
+							"name": "meta.delimiter.decimal.period.nitra"
+						}
+					}
+				}
+			]
+		},
+		"boolean-literal": {
+			"patterns": [
+				{
+					"name": "constant.language.boolean.true.nitra",
+					"match": "(?<!\\.|\\$)\\btrue\\b(?!\\$)"
+				},
+				{
+					"name": "constant.language.boolean.false.nitra",
+					"match": "(?<!\\.|\\$)\\bfalse\\b(?!\\$)"
+				}
+			]
+		},
+        "string": {
+			"patterns": [
+				{
+					"include": "#qstring-single"
+				},
+				{
+					"include": "#qstring-double"
+				}
+			]
+        },
+        "qstring-double": {
+			"name": "string.quoted.double.nitra",
+			"begin": "\"",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.nitra"
+				}
+			},
+			"end": "(\")|((?:[^\\\\\\n])$)",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.string.end.nitra"
+				},
+				"2": {
+					"name": "invalid.illegal.newline.nitra"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#string-character-escape"
+				}
+			]
+		},
+		"qstring-single": {
+			"name": "string.quoted.single.nitra",
+			"begin": "'",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.nitra"
+				}
+			},
+			"end": "(\\')|((?:[^\\\\\\n])$)",
+			"endCaptures": {
+				"1": {
+					"name": "punctuation.definition.string.end.nitra"
+				},
+				"2": {
+					"name": "invalid.illegal.newline.nitra"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#string-character-escape"
+				}
+			]
+        },
+        "string-character-escape": {
+			"name": "constant.character.escape.nitra",
+			"match": "\\\\(x[0-9A-Fa-f]{2}|[0-2][0-7]{0,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.|$)"
+		},
+        "ast-declaration": {
+            "begin": "(?=\\b(ast|abstract)\\b)",
+            "end": "(?<=\\})",
+            "patterns": [
+                {
+                    "begin": "(?x)(?:\\b(abstract)\\s+)?\\b(ast)\\b\\s+\n([_[:alpha:]][_[:alnum:]]*)\\s*",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "keyword.modifier.nitra"
+                        },
+                        "2": {
+                            "name": "storage.control.nitra"
+                        },
+                        "3": {
+                            "name": "entity.name.type.ast.nitra"
+                        }
+                    },
+                    "end": "(?=\\{)",
+                    "patterns": [
+                        {
+                            "include": "#comment"
+                        },
+                        {
+                            "include": "#base-types"                            
+                        }
+                    ]
+                },
+                {
+                    "begin": "\\{",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.curlybrace.open.nitra"
+                        }
+                    },
+                    "end": "\\}",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.curlybrace.close.nitra"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "#class-or-struct-members"
+                        },
+                        {
+                            "include": "#ast-declaration_inner"
+                        }
+                    ]
+                },
+                {
+                    "include": "#comment"
+                }
+            ]
+        },
+        "ast-declaration_inner": {
+            "begin": "(?=|)",
+            "end": "(?<=\\})",
+            "patterns": [
+                {
+                    "begin": "(?x)\\s*\n([_[:alpha:]][_[:alnum:]]*)\\s*",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "keyword.modifier.nitra"
+                        },
+                        "2": {
+                            "name": "storage.control.nitra"
+                        },
+                        "3": {
+                            "name": "entity.name.type.ast.nitra"
+                        }
+                    },
+                    "end": "(?=\\{)",
+                    "patterns": [
+                        {
+                            "include": "#comment"
+                        },
+                        {
+                            "include": "#base-types"                            
+                        }
+                    ]
+                },
+                {
+                    "begin": "\\{",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "punctuation.curlybrace.open.nitra"
+                        }
+                    },
+                    "end": "\\}",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.curlybrace.close.nitra"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "#class-or-struct-members"
+                        }
+                    ]
+                },
+                {
+                    "include": "#comment"
+                }
+            ]
+        },
+        "class-or-struct-members": {
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#field-declaration2"
+				}
+			]
+        },
+        "field-declaration2": {
+			"begin": "(?x)\n(?<type-name>\n  (?:\n    (?:\n      (?:(?<identifier>[_[:alpha:]][_[:alnum:]]*)\\s*\\:\\:\\s*)? # alias-qualification\n      (?<name-and-type-args> # identifier + type arguments (if any)\n        \\g<identifier>\\s*\n        (?<type-args>\\s*<(?:[^<>]|\\g<type-args>)+>\\s*)?\n      )\n      (?:\\s*\\.\\s*\\g<name-and-type-args>)* | # Are there any more names being dotted into?\n      (?<tuple>\\s*\\((?:[^\\(\\)]|\\g<tuple>)+\\))\n    )\n    (?:\\s*\\*\\s*)* # pointer suffix?\n    (?:\\s*\\?\\s*)? # nullable suffix?\n    (?:\\s*\\[(?:\\s*,\\s*)*\\]\\s*)* # array suffix?\n  )\n)\\s+\n(\\g<identifier>)\\s* # first field name\n(?!=>|==)(?=,|;|=|$)",
+			"beginCaptures": {
+				"1": {
+					"patterns": [
+						{
+							"include": "#type"
+						}
+					]
+				},
+				"6": {
+					"name": "entity.name.variable.field.nitra"
+				}
+			},
+			"end": "(?=;)",
+			"patterns": [
+				{
+					"name": "entity.name.variable.field.nitra",
+					"match": "[_[:alpha:]][_[:alnum:]]*"
+				},
+				{
+					"include": "#punctuation-comma"
+				},
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#class-or-struct-members"
+				}
+			]
+		},
+		"storage-modifier": {
+            "patterns": [
+                {
+                    "name": "storage.modifier.nitra",
+                    "match": "(?<!\\.)\\b(abstract)\\b"    
+                }
+            ]		
+        },
+        "base-types": {
+            "begin": ":",
+            "beginCaptures": {
+                "0": {
+                    "name": "punctuation.separator.colon.nitra"
+                }
+            },
+            "end": "(?=\\{)",
+                "patterns": [
+                    {
+                        "include": "#type"
+                    },
+                    {
+                        "include": "#punctuation-comma"
+                    }
+                ]
+        },
+        "type": {
+			"name": "meta.type.nitra",
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#nitra-builtin"
+				},
+				{
+					"include": "#type-name"
+				}
+			]
+        },
+        "type-name": {
+			"patterns": [
+				{
+					"match": "([_[:alpha:]][_[:alnum:]]*)\\s*(\\:\\:)",
+					"captures": {
+						"1": {
+							"name": "entity.name.type.alias.nitra"
+						},
+						"2": {
+							"name": "punctuation.separator.coloncolon.nitra"
+						}
+					}
+				},
+				{
+					"match": "([_[:alpha:]][_[:alnum:]]*)\\s*(\\.)",
+					"captures": {
+						"1": {
+							"name": "storage.type.nitra"
+						},
+						"2": {
+							"name": "punctuation.accessor.nitra"
+						}
+					}
+				},
+				{
+					"match": "(\\.)\\s*([_[:alpha:]][_[:alnum:]]*)",
+					"captures": {
+						"1": {
+							"name": "punctuation.accessor.nitra"
+						},
+						"2": {
+							"name": "storage.type.nitra"
+						}
+					}
+				},
+				{
+					"name": "storage.type.nitra",
+					"match": "[_[:alpha:]][_[:alnum:]]*"
+				}
+			]
+		},
+        "punctuation-comma": {
+			"name": "punctuation.separator.comma.nitra",
+			"match": ","
+		},
+        "punctuation-semicolon": {
+			"name": "punctuation.terminator.statement.nitra",
+			"match": ";"
+		}
+    }
+}

@@ -1,9 +1,9 @@
 {
     "name": "nitra",
-    "displayName": "nitra",
-    "description": "Nitra VS Code extension",
-    "version": "0.0.1",
-    "publisher": "ifle",
+    "displayName": "Nitra Syntax Highlighting",
+    "description": "Nitra Syntax Highlighting",
+    "version": "0.0.3",
+    "publisher": "igorfle",
     "engines": {
         "vscode": "*"
     },
