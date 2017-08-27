@@ -1,13 +1,11 @@
 # Nitra Language support
 
-Support for the Nitra programming language in visual studio code.
+Support for the Nitra programming language in Visual Studio Code.
 
 ## Highlighting
 
-Highlighting
-
-Adds highlighting support for Nitra (.nitra).
+Adds basic highlighting support for Nitra (.nitra).
 
 ### 0.0.*
 
-Initial release of Highlighting
+Initial preview of Highlighting
