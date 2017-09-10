@@ -4,6 +4,9 @@
     "scopeName": "source.nitra",
     "uuid": "81301747-47b9-41c5-8f66-3d5fda39bde6",
     "patterns": [{
+            "include": "#nemerle-keywords"
+        },
+        {
             "include": "#nitra-keywords"
         },
         {
@@ -20,10 +23,16 @@
         }
     ],
     "repository": {
+        "nemerle-keywords": {
+            "patterns": [{
+                "name": "keyword.other.nemerle",
+                "match": "\\b(#if|#region|[Accessor]|[Record]|abort|abstract|and|array|as|assert|base|catch|class|def|delegate|do|else|enum|event|extends|extern|finally|for|foreach|fun|if|ignore|implements|in|interface|internal|is|lock|macro|match|match_|matches|module|mutable|namespace|new|null|out|override|params|partial|private|protected|public|ref|sealed|static|struct|syntax|this|throw|try|type|typeof|unless|using|variant|virtual|void|volatile|when|where|while|with|FALSE|TRUE)\\b"
+            }]
+        },
         "nitra-keywords": {
             "patterns": [{
                 "name": "keyword.other.nitra",
-                "match": "\\b(start|language|keyword|as|syntax|declaration|declarations|ast|asts|extend|module|marker|map|token|field|span|alias|regex|literal|decompose|multiple|optional|abstract|in|out|inout|class|this|rule|precedence|using|namespace|PredefinedType|right-associative|keyoutline_impl|outline_impl|outline_begin|outline_end|outline_begin_before|outline_end_before|outline_hiden|sm|inl|nl|d|i)\\b"
+                "match": "\\b(symbol|start|language|keyword|as|syntax|declaration|declarations|ast|asts|extend|module|marker|map|token|field|span|alias|regex|literal|decompose|multiple|optional|abstract|in|out|inout|class|this|rule|precedence|using|namespace|PredefinedType|right-associative|keyoutline_impl|outline_impl|outline_begin|outline_end|outline_begin_before|outline_end_before|outline_hiden|sm|inl|nl|d|i)\\b"
             }]
         },
         "nitra-operators": {

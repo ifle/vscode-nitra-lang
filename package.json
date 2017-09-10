@@ -2,15 +2,15 @@
     "name": "nitra",
     "displayName": "Nitra Syntax Highlighting",
     "description": "Nitra Syntax Highlighting",
-    "version": "0.0.4",
-    "publisher": "igorfle",    
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/ifle/vscode-nitra-lang.git"
-	},
-	"bugs": {
-		"url": "https://github.com/ifle/vscode-nitra-lang/issues"
-	},
+    "version": "0.0.5",
+    "publisher": "igorfle",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ifle/vscode-nitra-lang.git"
+    },
+    "bugs": {
+        "url": "https://github.com/ifle/vscode-nitra-lang/issues"
+    },
     "icon": "nitra-logo.png",
     "engines": {
         "vscode": "*"
